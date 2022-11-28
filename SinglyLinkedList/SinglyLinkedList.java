@@ -70,17 +70,72 @@ class SinglyLinkedList {
         }
     }
 
+    //remove a node from the front of the list
+    public void removeFromFront() {
+        if(head == null) {
+            System.out.print("List is Empty!!");
+        }else {
+            Node temp = head;
+            head = temp.next;
+            temp.next = null;
+            length--;
+        }
+    }
+
+    //remove a node from the end of the list
+    public void removeFromEnd() {
+        if(head == null) {
+            System.out.print("List is Empty");
+        }else {
+            Node temp = null;
+            Node curr = head;
+            while(curr.next != null) {
+                temp = curr;
+                curr = curr.next;
+            }
+            temp.next = null;
+            length--;
+        }
+    }
+
+    //remove particular node from the list
+    public void removeNode(int data) {
+        if(head == null) {
+            System.out.println("List is Empty!");
+        }else {
+            Node temp = head;
+            if(temp.data == data) {
+                head = temp.next;
+                temp.next = null;
+            }else {
+               Node curr = temp.next;
+               while(curr != null) {
+                 if(curr.data != data) {
+                   temp = curr;
+                   curr = curr.next;
+                 }else {
+                    break;
+                 }
+               }
+               temp.next = curr.next;
+               curr.next = null;
+            }
+            length--;
+        }
+    }
+
     public static void main(String[] args) {
         SinglyLinkedList list = new SinglyLinkedList();
         list.insertAtFront(10);
-        list.insertAtFront(20);
-        list.insertAtFront(30);
+        list.insertAtEnd(20);
         list.insertAtEnd(40);
-        list.insertAtEnd(50);
-        list.insertAtPosition(99, 2);
-        list.insertAtPosition(1001, 4);
-        list.insertAtPosition(900, -1);
-        list.insertAtPosition(888, 200);
+        list.insertAtEnd(60);
+        list.removeFromFront();
+        list.removeFromFront();
+        list.removeFromEnd();
+        list.removeFromEnd();
+        list.removeNode(10);
+        list.removeNode(60);
         list.printlist();
     }
 }
